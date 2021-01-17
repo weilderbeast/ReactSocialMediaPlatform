@@ -12,7 +12,7 @@ function Post(props) {
     const [count, setCount] = useState(0);
 
     const increment = () => {
-      setCount(count +1);
+        setCount(count + 1);
     };
 
     return (
@@ -32,6 +32,9 @@ function Post(props) {
                     </div>
                 </div>
             </div>
+            <div className="post-description">
+                <p>{props.description}</p>
+            </div>
             <div className="post-content">
                 <img src={props.image}/>
             </div>
@@ -44,7 +47,9 @@ function Post(props) {
                     <span>{count}</span>
                 </div>
                 <div className="post-bottom-reactions">
-                    <div className="post-bottom-reactions-icon" onClick={() =>{setCount(count +1);}}>
+                    <div className="post-bottom-reactions-icon" onClick={() => {
+                        setCount(count + 1);
+                    }}>
                         <Like/>
                         <span>Like</span>
                     </div>
