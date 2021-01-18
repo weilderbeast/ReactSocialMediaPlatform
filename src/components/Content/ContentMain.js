@@ -33,10 +33,11 @@ function ContentMain() {
                        image={"https://wallpapercave.com/wp/wp2084607.jpg"}/>
             </div>
             <PostAdder
-                name={"Maria Alexia Udrea"}
-                picture={<Logo/>}
+                name={state.loggedUser}
+                picture={state.profilePicture}
                 postDescription={postDescription}
                 setPostDescription={setPostDescription}
+                postImage={postImage}
                 setPostImage={setPostImage}
                 posts={posts}
                 setPosts={setPosts}

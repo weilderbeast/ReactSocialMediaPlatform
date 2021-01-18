@@ -8,12 +8,7 @@ import {ReactComponent as GIF} from "../../../../icons/gif.svg";
 import {ReactComponent as Sticker} from "../../../../icons/sticker.svg";
 
 function Post(props) {
-
     const [count, setCount] = useState(0);
-
-    const increment = () => {
-        setCount(count + 1);
-    };
 
     return (
         <div className="post-container">
@@ -36,7 +31,7 @@ function Post(props) {
                 <p>{props.description}</p>
             </div>
             <div className="post-content">
-                <img src={props.image}/>
+                <img src={props.image} alt="photo"/>
             </div>
             <div className="post-bottom">
                 <div className="post-bottom-shared">

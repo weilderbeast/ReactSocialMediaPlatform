@@ -376,6 +376,16 @@ code {
     background-color: #3A3B3C;
 }
 
+.custom-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-input::before{
+    content: "";
+    width: 38px;
+    height: 38px;
+}
+
+
 
 .create-post-title {
     display: flex;
@@ -424,6 +434,13 @@ code {
     min-height: 180px;
     color: white;
     resize: none;
+}
+
+.create-post-extras svg{
+    width: 25px;
+    height: 25px;
+    fill: limegreen;
+    cursor: pointer;
 }
 
 .create-post-extras {
@@ -505,6 +522,11 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 690px;
+}
+
+.post-content img{
+    max-width: 690px;
 }
 
 .post-bottom {

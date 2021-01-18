@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ReactComponent as Record} from "../../../icons/microphone.svg";
 import {ReactComponent as Photo} from "../../../icons/image.svg";
 import {ReactComponent as Smile} from "../../../icons/smiling.svg";
-import DefaultModal from "../Commons/DefaultModal";
+import PostCreationModal from "../Commons/PostCreationModal";
 
 function PostAdder(props) {
 
@@ -13,8 +13,20 @@ function PostAdder(props) {
     }
 
     const postCreationHandler = (e) => {
-        console.log(e.target.value);
         props.setPostDescription(e.target.value);
+    }
+
+    const postImageHandler = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        let path = e.target.value;
+        let result = "images/"+path.slice(12,path.length);
+        reader.onloadend = () => {
+            props.setPostImage(result);
+        }
+        reader.readAsDataURL(file)
+        
     }
 
     const submitPostHandler = (e) => {
@@ -23,56 +35,14 @@ function PostAdder(props) {
             ...props.posts,
             {
                 description: props.postDescription,
-                ID: ID
+                image: props.postImage,
+                key: ID
             }
         ]);
         increment();
         props.setPostDescription("");
     }
 
-    const modalStyle = {
-        position: "absolute",
-        width: "400px",
-        backgroundColor: "transparent",
-        padding: "4px 8px",
-        top: "50%",
-        left: "50%",
-        outline: "none",
-        transform: "translate(-55%, -55%)"
-    }
-
-    const modalButton = (
-        <div className="post-adder-creator">
-            What's on your mind?
-        </div>
-    )
-
-    const modalBody = (
-        <div className="create-post-container">
-            <div className="create-post-title">
-                Create Post
-            </div>
-            <div className="create-post-subtitle">
-                <div>{props.picture}</div>
-                <div>{props.name}</div>
-            </div>
-            <div className="create-post-input">
-                <form>
-                    <textarea onChange={postCreationHandler} placeholder={"What's on your mind?"}/>
-                    <div className="create-post-extras">
-                        Add photo
-                        <ul>
-                            <li>
-                                <Photo/>
-                            </li>
-                        </ul>
-                    </div>
-                    <button type="submit" onClick={submitPostHandler}>Post</button>
-                </form>
-            </div>
-
-        </div>
-    );
 
     return (
         <div className="post-adder-container">
@@ -80,10 +50,12 @@ function PostAdder(props) {
                 <div className="post-profile-pic">
                     {props.picture}
                 </div>
-                <DefaultModal
-                    style={modalStyle}
-                    button={modalButton}
-                    content={modalBody}
+                <PostCreationModal
+                    name={props.name}
+                    picture={props.picture}
+                    postCreationHandler={postCreationHandler}
+                    postImageHandler={postImageHandler}
+                    submitPostHandler={submitPostHandler}
                 />
             </div>
             <div className="post-adder-bottom">

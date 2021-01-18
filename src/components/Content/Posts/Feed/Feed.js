@@ -10,6 +10,8 @@ function Feed(props){
                   profilePicture={props.profilePicture}
                   postOwner={props.postOwner}
                   timestamp={props.timestamp}
+                  image={post.image}
+                  key={post.key}
               />
           ))}
       </div>
