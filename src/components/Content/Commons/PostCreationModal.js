@@ -5,6 +5,7 @@ import {ReactComponent as Photo} from "../../../icons/image.svg";
 function PostCreationModal(props) {
 
     const [open, setOpen] = React.useState(false);
+    const [enabled, setEnabled] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -30,6 +31,13 @@ function PostCreationModal(props) {
         handleClose();
     }
 
+    const verifyInput = (e) => {
+        props.postCreationHandler(e);
+        if (e.target.value === null || e.target.value === undefined || e.target.value === "")
+            setEnabled(false);
+        else setEnabled(true);
+    }
+
     const body = (
         <div style={modalStyle}>
             <div className="create-post-container">
@@ -42,7 +50,7 @@ function PostCreationModal(props) {
                 </div>
                 <div className="create-post-input">
                     <form>
-                        <textarea onChange={props.postCreationHandler} placeholder={"What's on your mind?"}/>
+                        <textarea onChange={verifyInput} placeholder={"What's on your mind?"}/>
                         <div className="create-post-extras">
                             Add photo
                             <ul>
@@ -63,7 +71,7 @@ function PostCreationModal(props) {
                                 </li>
                             </ul>
                         </div>
-                        <button type="submit" onClick={finishPost}>Post</button>
+                        <button type="submit" disabled={!enabled} onClick={finishPost}>Post</button>
                     </form>
                 </div>
             </div>
@@ -71,17 +79,12 @@ function PostCreationModal(props) {
         </div>
     );
 
-    let div;
-    if (!open) {
-        div = <div className="post-adder-creator">
-            <p>What's on your mind? </p>
-        </div>
-    } else div = <div className="post-adder-creator"/>
-
     return (
         <div style={{width: "100%"}}>
             <div onClick={handleOpen} style={{width: "100%"}}>
-                {div}
+                <div className="post-adder-creator">
+                    <p>What's on your mind? </p>
+                </div>
             </div>
             <Modal
                 open={open}

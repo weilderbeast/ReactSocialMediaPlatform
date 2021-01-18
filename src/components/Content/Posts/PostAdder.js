@@ -20,13 +20,12 @@ function PostAdder(props) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
-        let path = e.target.value;
-        let result = "images/"+path.slice(12,path.length);
+
         reader.onloadend = () => {
-            props.setPostImage(result);
+            props.setPostImage(reader.result);
         }
         reader.readAsDataURL(file)
-        
+
     }
 
     const submitPostHandler = (e) => {

@@ -10,6 +10,14 @@ import {ReactComponent as Sticker} from "../../../../icons/sticker.svg";
 function Post(props) {
     const [count, setCount] = useState(0);
 
+    let img;
+
+    if(props.image === "" || props.image === undefined){
+        img=  <img/>;
+    } else {
+        img =<img src={props.image} alt="photo" id="#id"/>;
+    }
+
     return (
         <div className="post-container">
             <div className="post-top">
@@ -31,7 +39,7 @@ function Post(props) {
                 <p>{props.description}</p>
             </div>
             <div className="post-content">
-                <img src={props.image} alt="photo"/>
+                {img}
             </div>
             <div className="post-bottom">
                 <div className="post-bottom-shared">
